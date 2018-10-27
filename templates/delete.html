@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<script>
+    $(document).ready(function(){
+        $("#delete_person").hide();
+    });
+    $(document).ready(function(){
+        $("#delete_city").hide();
+    });
+
+    $(document).ready(function(){
+        $("#person-btn").click(function(){
+            $("#delete_person").show();
+            $("#delete_city").hide();
+        });
+        $("#city-btn").click(function(){
+            $("#delete_person").hide();
+            $("#delete_city").show();
+        });
+    });
+</script>
+    
+<div class="container mt-3" align="center">
+    <input class="btn btn-danger" type="button" id="person-btn" value="PERSON">
+    <input class="btn btn-danger" type="button" id="city-btn" value="CITY">
+</div>
+
+<div class="container mt-3" id="delete_person">
+    {% for i in person %}
+    <div class="row justify-content-md-center">
+        <form action="/delete_person" method='POST'>
+            <div class="mt-3">
+                <input type="hidden" id="id" name="id" value="{{ i[0] }}">
+                <input type="text" id="name" name="name" value="{{ i[1] }}" READONLY/>
+                <input type="text" id="surname" name="surname" value="{{ i[2] }}" READONLY/>
+                <input type="text" id="city_id" name="city_id" value="{{ i[3] }}" READONLY/>
+                <input type="text" id="phone_number" name="phone_number" value="{{ i[4] }}" READONLY/> 
+                <input class="btn btn-outline-danger" type="submit" value="Delete">
+            </div>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="container mt-3" id="delete_city">
+    {% for j in city %}
+    <div class="row justify-content-md-center">
+        <form action="/delete_city" method='POST'>
+            <div class="mt-3">
+                <input type="hidden" id="city_id" name="city_id" value="{{ j[0] }}" READONLY/>
+                <input type="text" id="city_name" name="city_name" value="{{ j[1] }}" READONLY/>
+                <input class="btn btn-outline-danger" type="submit" value="Delete">
+            </div>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

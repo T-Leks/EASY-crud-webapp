@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<script>
+    $(document).ready( function () {
+        $('#person-city').DataTable();
+    } );
+    
+    $(document).ready( function () {
+        $('#person').DataTable();
+    } );
+
+    $(document).ready( function () {
+        $('#city').DataTable();
+    } );
+</script>
+
+{% if session.username %}
+<div class="container mt-3 mb-3">
+    <div class="row justify-content-md-end">
+        <form action="/create">
+            <div class="m-1">
+                <input class="btn btn-primary" type="submit" value="Insert">
+            </div>
+        </form>
+        <form action="/change">
+            <div class="m-1">
+                <input class="btn btn-success" type="submit" value="Update">
+            </div>
+        </form>
+        <form action="/destroy">
+            <div class="m-1">
+                <input class="btn btn-danger" type="submit" value="Delete">
+            </div>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+<div class="container mt-5">
+    <div align="center">
+        <h2>PERSON X CITY</h2>
+    </div>
+    <table id="person-city" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>PID</th>
+                <th>NAME</th>
+                <th>SURNAME</th>
+                <th>CID</th>
+                <th>CITY NAME</th>
+                <th>PHONE NUMBER</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rows in person_city %}
+            <tr>
+                {% for i in rows %}
+                <td>{{ i }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="container mt-5">
+    <div align="center">
+        <h2>PERSON TABLE</h2>
+    </div>
+    <table id="person" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>PID</th>
+                <th>NAME</th>
+                <th>SURNAME</th>
+                <th>CID</th>
+                <th>PHONE NUMBER</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rows in person %}
+            <tr>
+                {% for i in rows %}
+                <td>{{ i }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="container mt-5">
+    <div align="center">
+        <h2>CITY TABLE</h2>
+    </div>
+    <table id="city" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>CID</th>
+                <th>CITY NAME</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rows in city %}
+            <tr>
+                {% for i in rows %}
+                <td>{{ i }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
